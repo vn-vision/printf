@@ -70,7 +70,7 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 			{
 				char *str = va_arg(nArgs, char *);
 
-				if (*str != '\0')
+				if (str != NULL && *str != '\0')
 				{
 					write(1, str, strlen(str));
 					(*count) += strlen(str);
@@ -82,7 +82,7 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 				(*count)++;
 				break;
 			default:
-				write(1, "%%", 2);
+				write(1, *format, 1);
 				(*count) += 2;
 				break;
 		}
