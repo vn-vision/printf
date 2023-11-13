@@ -19,7 +19,6 @@ int _printf(const char *format, ...)
 	unsigned int count = 0;
 
 	va_start(nArgs, format);
-
 	while (*format != '\0')
 	{
 		check_modifier(nArgs, &format, &count);
@@ -44,23 +43,16 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 		(*format)++;
 		switch (**format)
 		{
-			case ('c'):
+			case ('d'):
 			{
-				char chr = va_arg(nArgs, int);
-
-				write(STDOUT_FILENO, &chr, 1);
+				write(STDOUT_FILENO, va_arg(nArgs, int), sizeof(int));
 				(*count)++;
 				break;
 			}
-			case ('s'):
+			case ('i'):
 			{
-				char *str = va_arg(nArgs, char *);
-
-				if (*str != '\0')
-				{
-					write(STDOUT_FILENO, str, strlen(str));
-					(*count) += strlen(str);
-				}
+				write(STDOUT_FILENO, va_arg(nArgs, int), sizeof(int));
+				(*count)++;
 				break;
 			}
 			case ('%'):
