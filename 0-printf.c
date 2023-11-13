@@ -68,8 +68,8 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 				(*count)++;
 				break;
 			default:
-				write(STDOUT_FILENO, *format, sizeof(char));
-				(*count)++;
+				write(STDOUT_FILENO, "%%", 2);
+				(*count) += 2;
 				break;
 		}
 
