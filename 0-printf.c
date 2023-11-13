@@ -22,7 +22,17 @@ int _printf(const char *format, ...)
 
 	while (*format != '\0')
 	{
-		check_modifier(nArgs, &format, &count);
+		if (**format == '%')
+		{
+			(*format)++;
+			check_modifier(nArgs, &format, &count);
+
+		}
+		else
+		{
+			write(STDOUT_FILENO, format, 1);
+			(*count)++;
+		}
 		format++;
 	}
 	va_end(nArgs);
@@ -39,9 +49,6 @@ int _printf(const char *format, ...)
 
 void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 {
-	if (**format == '%')
-	{
-		(*format)++;
 		switch (**format)
 		{
 			case ('c'):
@@ -72,11 +79,4 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 				(*count) += 2;
 				break;
 		}
-
-	}
-	else
-	{
-		write(STDOUT_FILENO, format, 1);
-		(*count)++;
-	}
 }
