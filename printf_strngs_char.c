@@ -3,18 +3,21 @@
 #include <unistd.h>
 #include <string.h>
 
-
 /**
-* _printf -produces output according to format
+* _print - produces output according to format
 * returns number of char printed excluding
 *	: null byte '\0'
 * write output to stdout stream
 * @format: character string
+* @nArgs: stores variable arguments
+* @count: keeps count of characters
 * Return: 0 Always true.
 *
 */
 
-int _printf(const char *format, ...)
+void check_modifier(va_list nArgs, const char *format, int *count);
+
+int _print(const char *format, ...)
 {
 	int count = 0, i = 0;
 	va_list nArgs;
@@ -47,17 +50,17 @@ int _printf(const char *format, ...)
 			/**
 			* char c for char
 			*/
-			if (format[i] == "c")
+			if (format[i] == 'c')
 			{
-				write(1, va_arg(nArgs, int), 1);
-				count++;
+				char c = (char)va_arg(nArgs, int);
+				write(1, &c, 1);
 			}
-			else if (format[i] == "%")
+			else if (format[i] == '%')
 			{
 				write(1, format, 1);
 				count += 2;
 			}
-			else if (format[i] == "s")
+			else if (format[i] == 's')
 			{
 				char *str = va_arg(nArgs, char *);
 
@@ -75,5 +78,6 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
-
+	va_end(nArgs);
+	return count;
 }
