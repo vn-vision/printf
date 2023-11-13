@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			write(STDOUT_FILENO, format, 1);
+			write(1, format, 1);
 			(*count)++;
 		}
 		format++;
@@ -62,7 +62,7 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 			{
 				char chr = va_arg(nArgs, int);
 
-				write(STDOUT_FILENO, &chr, 1);
+				write(1, &chr, 1);
 				(*count)++;
 				break;
 			}
@@ -72,17 +72,17 @@ void check_modifier(va_list nArgs, const char **format, unsigned int *count)
 
 				if (*str != '\0')
 				{
-					write(STDOUT_FILENO, str, strlen(str));
+					write(1, str, strlen(str));
 					(*count) += strlen(str);
 				}
 				break;
 			}
 			case ('%'):
-				write(STDOUT_FILENO, "%", 1);
+				write(1, "%", 1);
 				(*count)++;
 				break;
 			default:
-				write(STDOUT_FILENO, "%%", 2);
+				write(1, "%%", 2);
 				(*count) += 2;
 				break;
 		}
