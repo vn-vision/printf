@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 
+
 /**
 * _printf -produces output according to format
 * returns number of char printed excluding
@@ -18,13 +19,19 @@ int _printf(const char *format, ...)
 	va_list nArgs;
 	unsigned int count = 0;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(nArgs, format);
 
 	while (*format != '\0')
 	{
-		if (**format == '%')
+		if (*format == '%')
 		{
-			(*format)++;
+			format++;
+			if (*format == '\0')
+				break;
+
 			check_modifier(nArgs, &format, &count);
 
 		}
