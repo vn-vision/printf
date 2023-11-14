@@ -34,14 +34,14 @@ int _print(const char *format, ...)
 	* check whether index points to null byte
 	* loop until null byte is reached
 	*/
-	while (format && format[i] != '\0')
+	while (*formet)
 	{
 		/**
 		* check if index points to %
 		* if so check the next char
 		* if not print the char
 		*/
-		if (format[i] == '%')
+		if (format[i] != '%')
 		{
 			format++;
 			if (format[i] == '\0')
@@ -52,13 +52,14 @@ int _print(const char *format, ...)
 			*/
 			if (format[i] == 'c')
 			{
-				char c = (char)va_arg(nArgs, int);
+				char c = va_arg(nArgs, int);
 				write(1, &c, 1);
+				count++;
 			}
 			else if (format[i] == '%')
 			{
 				write(1, format, 1);
-				count += 2;
+				count++;
 			}
 			else if (format[i] == 's')
 			{
@@ -76,7 +77,7 @@ int _print(const char *format, ...)
 			write(1, format, 1);
 			count++;
 		}
-		i++;
+		format++;
 	}
 	va_end(nArgs);
 	return count;
