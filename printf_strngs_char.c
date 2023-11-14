@@ -53,6 +53,7 @@ int _print(const char *format, ...)
 			if (format[i] == 'c')
 			{
 				char c = va_arg(nArgs, int);
+
 				write(1, &c, 1);
 				count++;
 			}
@@ -80,5 +81,5 @@ int _print(const char *format, ...)
 		format++;
 	}
 	va_end(nArgs);
-	return count;
+	return (count);
 }
