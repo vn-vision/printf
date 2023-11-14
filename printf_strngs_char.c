@@ -37,6 +37,4 @@ void check_string_modifier(va_list nArgs, const char **format, int *count)
 			(*count) += strlen(str);
 		}
 	}
-
-	return (*count);
 }
