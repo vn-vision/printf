@@ -13,7 +13,7 @@
 *
 */
 void check_modifier(va_list nArgs, const char *format, int *count);
-int _print(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	int count = 0;
 	va_list nArgs;
