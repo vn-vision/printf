@@ -34,7 +34,7 @@ int _print(const char *format, ...)
 	* check whether index points to null byte
 	* loop until null byte is reached
 	*/
-	while (*formet)
+	while (*format)
 	{
 		/**
 		* check if index points to %
