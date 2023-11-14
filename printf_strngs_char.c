@@ -17,7 +17,7 @@ void check_string_modifier(va_list nArgs, const char **format, int *count)
 
 	if (**format == 'c')
 	{
-		char c = va_arg(nArgs, int);
+		int c = va_arg(nArgs, int);
 
 		write(1, &c, 1);
 		(*count)++;
