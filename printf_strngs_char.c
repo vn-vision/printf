@@ -24,7 +24,12 @@ void check_string_modifier(va_list nArgs, const char **format, int *count)
 			{
 				char *str = va_arg(nArgs, char *);
 
-				if (str != NULL && *str != '\0')
+				if (str == NULL && *str == '\0')
+				{
+					write(1, "(null)", 6);
+					(*count) += 6;
+				}
+				else
 				{
 					write(1, str, strlen(str));
 					(*count) += strlen(str);
