@@ -17,26 +17,26 @@ int check_int_modifier(va_list nArgs, const char **format, int *count)
 
 		if (**format == 'i' || **format == 'd')
 		{
-			int num = va_arg(nArgs, int);
+			int nList = va_arg(nArgs, int);
 
 			/**
 			* Convert integer to string with dynamic allocation
 			*/
 
-			int len = snprintf(NULL, 0, "%d", num);
-			char *num_str = malloc(len + 1);
+			int len = snprintf(NULL, 0, "%d", nList);
+			char *nList_String = malloc(len + 1);
 
-			if (num_str == NULL)
+			if (nList_String == NULL)
 				return (-1);
 
-			snprintf(num_str, len + 1, "%d", num);
+			snprintf(nList_String, len + 1, "%d", nList);
 
-			write(1, num_str, len);
+			write(1, nList_String, len);
 
 			(*count) += len;
 
-			free(num_str);
+			free(nList_String);
 		}
-
+	
 		return (*count);
 }

@@ -10,34 +10,26 @@
 
 void check_string_modifier(va_list nArgs, const char **format, int *count)
 {
-		switch (**format)
+	if (**format == 'c')
+	{
+		char c = va_arg(nArgs, int);
+
+		write(1, &c, 1);
+		(*count)++;
+	}
+	else if (**format == '%')
+	{
+		write(1, "%", 1);
+		(*count)++;
+	}
+	else if (**format == 's')
+	{
+		char *str = va_arg(nArgs, char *);
+
+		if (str != NULL && *str != '\0')
 		{
-			case ('c'):
-			{
-				char chr = va_arg(nArgs, int);
-
-				write(1, &chr, 1);
-				(*count)++;
-				break;
-			}
-			case ('s'):
-			{
-				char *str = va_arg(nArgs, char *);
-
-				if (str != NULL && *str != '\0')
-				{
-					write(1, str, strlen(str));
-					(*count) += strlen(str);
-				}
-				break;
-			}
-			case ('%'):
-				write(1, "%", 1);
-				(*count)++;
-				break;
-			default:
-				write(1, *format, 1);
-				(*count)++;
-				break;
+			write(1, str, strlen(str));
+			(*count) += strlen(str);
 		}
+	}
 }
