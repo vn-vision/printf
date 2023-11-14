@@ -1,40 +1,43 @@
 #include "main.h"
 
 /**
-* check_string_modifier - produces output according to format
-* returns number of char printed excluding
-*	: null byte '\0'
-* write output to stdout stream
-* @nArgs: List of var arguments.
-* @format: integers
-* @count: increment the numbers
+* check_string_modifier - checks modifier type
+* @nArgs: the variable list
+* @format: the string passed in _printf()
+* @count: counter
 * Return: void
-*
 */
 
 void check_string_modifier(va_list nArgs, const char **format, int *count)
 {
-
-	if (**format == 'c')
-	{
-		int c = va_arg(nArgs, int);
-
-		write(1, &c, 1);
-		(*count)++;
-	}
-	else if (**format == '%')
-	{
-		write(1, "%", 1);
-		(*count)++;
-	}
-	else if (**format == 's')
-	{
-		char *str = va_arg(nArgs, char *);
-
-		if (str != NULL)
+		switch (**format)
 		{
-			write(1, str, strlen(str));
-			(*count) += strlen(str);
+			case ('c'):
+			{
+				char chr = va_arg(nArgs, int);
+
+				write(1, &chr, 1);
+				(*count)++;
+				break;
+			}
+			case ('s'):
+			{
+				char *str = va_arg(nArgs, char *);
+
+				if (str != NULL && *str != '\0')
+				{
+					write(1, str, strlen(str));
+					(*count) += strlen(str);
+				}
+				break;
+			}
+			case ('%'):
+				write(1, "%", 1);
+				(*count)++;
+				break;
+			default:
+				write(1, "%%", 2);
+				(*count) += 2;
+				break;
 		}
-	}
 }
