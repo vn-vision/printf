@@ -36,7 +36,7 @@ void check_string_modifier(va_list nArgs, const char **format, int *count)
 				(*count)++;
 				break;
 			default:
-				write(1, *format, 0);
+				write(1, *format, 1);
 				(*count)++;
 				break;
 		}
