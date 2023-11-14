@@ -24,12 +24,7 @@ void check_string_modifier(va_list nArgs, const char **format, int *count)
 			{
 				char *str = va_arg(nArgs, char *);
 
-				if (str == NULL && *str == '\0')
-				{
-					write(1, "(null)", 6);
-					(*count) += 6;
-				}
-				else
+				if (str != NULL && *str != '\0')
 				{
 					write(1, str, strlen(str));
 					(*count) += strlen(str);
@@ -41,7 +36,7 @@ void check_string_modifier(va_list nArgs, const char **format, int *count)
 				(*count)++;
 				break;
 			default:
-				write(1, *format, 1);
+				write(1, *format, 0);
 				(*count)++;
 				break;
 		}
