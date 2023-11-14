@@ -33,7 +33,6 @@ int _printf(const char *format, ...)
 			if (*format == '\0')
 				break;
 
-			if (*format == 's')
 			/**
 			* char_string modifiers
 			*/
@@ -44,7 +43,6 @@ int _printf(const char *format, ...)
 			* integer modifiers
 			*/
 
-			else if (*format == 'd')
 			check_int_modifier(nArgs, &format, &count);
 		}
 		format++;
