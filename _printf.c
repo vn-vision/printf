@@ -36,18 +36,18 @@ int _printf(const char *format, ...)
 			/**
 			* char_string modifiers
 			*/
-				
+
 			check_string_modifier(nArgs, &format, &count);
-			
+
 			/**
 			* integer modifiers
 			*/
-			
+
 			check_int_modifier(nArgs, &format, &count);
 		}
 		format++;
 	}
-	
+
 	va_end(nArgs);
 	return (count);
 }

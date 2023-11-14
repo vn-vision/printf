@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
-* _printf - produces output according to format
+* check_string_modifier - produces output according to format
 * returns number of char printed excluding
 *	: null byte '\0'
 * write output to stdout stream
 * @nArgs: List of var arguments.
-* @*format: integers
+* @format: integers
 * @count: increment the numbers
 * Return: void
 *
@@ -14,7 +14,7 @@
 
 void check_string_modifier(va_list nArgs, const char **format, int *count)
 {
-	
+
 	if (**format == 'c')
 	{
 		char c = va_arg(nArgs, int);
